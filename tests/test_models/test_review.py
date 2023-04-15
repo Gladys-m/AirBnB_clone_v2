@@ -1,29 +1,37 @@
 #!/usr/bin/python3
-""" """
-from tests.test_models.test_base_model import test_basemodel
+"""Unittest for Review class"""
+import unittest
+import os
 from models.review import Review
 
 
-class test_review(test_basemodel):
-    """ """
+class TestReview(unittest.TestCase):
+    """Test cases for Review class"""
 
-    def __init__(self, *args, **kwargs):
-        """ """
-        super().__init__(*args, **kwargs)
-        self.name = "Review"
-        self.value = Review
+    @classmethod
+    def setUpClass(cls):
+        """Class method to open test's environment"""
+        cls.reviewInstance = Review()
+        try:
+            os.rename("file.json", "test_file.json")
+        except Exception:
+            pass
 
-    def test_place_id(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.place_id), str)
+    @classmethod
+    def tearDownClass(cls):
+        """Class method to close test's environment"""
+        try:
+            os.remove("file.json")
+            os.rename("test_file.json", "file.json")
+        except Exception:
+            pass
 
-    def test_user_id(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.user_id), str)
+    def test_attrs(self):
+        """Test case for 'Review' class attributes"""
+        self.assertEqual(self.reviewInstance.place_id, "")
+        self.assertEqual(self.reviewInstance.user_id, "")
+        self.assertEqual(self.reviewInstance.text, "")
 
-    def test_text(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.text), str)
+
+if __name__ == "__main__":
+    unittest.main()

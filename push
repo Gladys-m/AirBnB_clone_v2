@@ -1,2 +1,2 @@
-#!/usr/bin/env bash 
-git add . && git commit -m 'AIRBNB clone v2' && git push
+#!/usr/bin/bash
+git add . && git commit -m 'AIRBNB_V2' && git push

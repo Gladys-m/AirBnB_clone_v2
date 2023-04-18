@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+-- prepares a MySQL server for the project
 MYSQL_ROOT_PASSWORD = hbnb_dev_pwd;
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "CREATE DATABASE IF NOT EXISTS hbnb_dev_db;"
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost' IDENTIFIED BY 'hbnb_dev_pwd';"

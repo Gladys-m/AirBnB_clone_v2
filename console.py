@@ -112,19 +112,49 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """ Overrides the emptyline method of CMD """
         pass
+    
+    def do_create(self, arg):
+        """
+        Create a new object of a given class with the specified parameters.
+        Command syntax: create <Class name> <param 1> <param 2> <param 3>...
+        Param syntax: <key name>=<value>
+        Value syntax: String: "<value>" => starts with a double quote
+                  Float: <unit>.<decimal> => contains a dot .
+                  Integer: <number> => default case
+        """
 
-    def do_create(self, args):
-        """ Create an object of any class"""
-        if not args:
-            print("** class name missing **")
+        args = arg.split()
+        if len(args) < 2:
+            print("Error: create command requires at least two arguments.")
             return
-        elif args not in HBNBCommand.classes:
-            print("** class doesn't exist **")
+
+        class_name = args[0]
+        if class_name not in self.classes:
+            print(f"Error: class {class_name} does not exist.")
             return
-        new_instance = HBNBCommand.classes[args]()
-        storage.save()
-        print(new_instance.id)
-        storage.save()
+
+        # Get parameter dictionary from arguments
+        params = {}
+        for param in args[1:]:
+            if '=' not in param:
+                continue
+            key, value = param.split('=')
+            if value.startswith('"') and value.endswith('"'):
+                value = value[1:-1].replace('_', ' ').replace('\\"', '"')
+            else:
+                try:
+                    if '.' in value:
+                        value = float(value)
+                    else:
+                        value = int(value)
+                except ValueError:
+                    continue
+            params[key] = value
+
+        # Create object with parameters
+            obj = self.classes[class_name](**params)
+        self.objects.append(obj)
+        print(f"Created object {obj} of class {class_name}.")
 
     def help_create(self):
         """ Help information for the create method """

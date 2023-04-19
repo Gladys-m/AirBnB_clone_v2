@@ -1,5 +1,7 @@
-#!/usr/env/python3
-'''intitialize the models package'''
+#!/usr/bin/python3
+"""
+initialize the models package
+"""
 
 from os import getenv
 

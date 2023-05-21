@@ -10,16 +10,19 @@ def hello_hbnb():
     """displays Hello HBNB"""
     return "Hello HBNB!"
 
+
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
     """displays HBNB"""
     return "HBNB"
+
 
 @app.route('/c/<text>', strict_slashes=False)
 def c_text(text):
     """displays C followed by text"""
     text = text.replace('_', ' ')
     return 'C {}'.format(text)
+
 
 if __name__ == "__main__":
     """File name main"""

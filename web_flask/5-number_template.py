@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Starts a Flask web application"""
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -40,6 +40,7 @@ def number(n):
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def number_template(n):
+    """Displays HTML page if n is integer"""
     return render_template('5-number.html', number=n)
 
 
